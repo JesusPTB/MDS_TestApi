@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <h2>{{ repository.name }}</h2>
+    <p>Description : {{ repository.description }}</p>
+    <p>URL : {{ repository.url }}</p>
+{% endblock %}

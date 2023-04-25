@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GITHUB API!{% endblock %}
+
+{% block body %}
+    <h1>GITHUB API</h1>
+    <h2>User</h2>
+    <ul>
+        <li>Username: {{ user.login }}</li>
+        <li>Avatar: <img src="{{ user.avatar_url }}" alt="avatar"></li>
+        <li>Profile: <a href="{{ user.html_url }}">{{ user.html_url }}</a></li>
+    </ul>
+    {#    {{ dump(user) }} #}
+    <h2>Repositories</h2>
+    <p>Number of repositories: {{ repositories|length }}</p>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Owner</th>
+            <th>Collaborators</th>
+            <th>Language</th>
+            <th>Visibility</th>
+            <th>Created at</th>
+            <th>Updated at</th>
+            <th>Link</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for repo in repositories %}
+            <tr>
+                <td><a href="{{ path('app_github_user_repository', {user: repo.owner.login, repository: repo.name}) }}">{{ repo.name }}</a></td>
+                <td><a href="{{ path('app_github_user', {user: repo.owner.login}) }}"> {{ repo.owner.login }}</a></td>
+                <td>
+                    {% if repo.collaborators is defined and repo.collaborators is not empty %}
+                        <ul>
+                            {% for colab in repo.collaborators %}
+                                <li>
+                                    <a href="{{ path('app_github_user', {user: colab.login}) }}">{{ colab.login }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        No collaborators
+                    {% endif %}
+                </td>
+                <td>{{ repo.language }}</td>
+                <td>{{ repo.private ? 'Private' : 'Public' }}</td>
+                <td>{{ repo.created_at|date('d/m/Y') }}</td>
+                <td>{{ repo.updated_at|date('d/m/Y') }}</td>
+                <td><a href="{{ repo.html_url }}">{{ repo.html_url }}</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

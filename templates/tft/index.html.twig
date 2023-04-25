@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TftController!{% endblock %}
+
+{% block body %}
+    <h1>RIOT API</h1>
+    <h2>Summoner</h2>
+    <p>Summoner name : {{ user.name }}</p>
+    <p>Summoner level : {{ user.summonerLevel }}</p>
+    <img src="http://ddragon.leagueoflegends.com/cdn/10.16.1/img/profileicon/{{ user.profileIconId }}.png" alt="profile icon">
+    <h2>Match</h2>
+
+{% endblock %}
