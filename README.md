@@ -1,6 +1,6 @@
 # MDS_TestApi
 Test Github and Riot Games API
 
-##Installation
+## Installation
 ```Composer install```
 ```symfony serve```
